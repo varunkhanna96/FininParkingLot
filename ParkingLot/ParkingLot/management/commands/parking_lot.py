@@ -35,4 +35,7 @@ class ParkingArea:
         return True
 
     def status(self):
+        print("Slot No.  Registration No  Colour")
+        for slot, car in self.slot_car_map.items():
+            print("{}         {}    {}".format(slot, car.registration_no, car.color))
         return True
