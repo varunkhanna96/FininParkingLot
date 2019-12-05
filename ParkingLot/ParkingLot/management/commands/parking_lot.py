@@ -1,3 +1,6 @@
+from collections import OrderedDict
+
+
 class Car:
     def __init__(self, reg_no, color):
         self.registration_no = reg_no
@@ -8,7 +11,8 @@ class ParkingArea:
     def __init__(self):
         self.total_slots = None
         self.available_slots = list()
-        self.slot_car_map = dict()
+        self.slot_car_map = OrderedDict()
+        self.reg_no_slot_map = dict()
 
     def create_slots(self, number_of_slots):
         self.total_slots = number_of_slots
@@ -21,6 +25,8 @@ class ParkingArea:
             car = Car(number, color)
             slot = self.available_slots.pop()
             self.slot_car_map[slot] = car
+            self.reg_no_slot_map[number] = slot
+            print('Car parked on slot number {}'.format(slot))
             return slot
         else:
             print('Parking Lot is full. Please come back later.')
@@ -30,7 +36,9 @@ class ParkingArea:
             print('There is no car parked in the given slot.')
             return False
         self.available_slots.append(slot)
+        car = self.slot_car_map[slot]
         del self.slot_car_map[slot]
+        del self.reg_no_slot_map[car.registration_no]
         print('Slot number {} is free'.format(slot))
         return True
 
@@ -39,3 +47,19 @@ class ParkingArea:
         for slot, car in self.slot_car_map.items():
             print("{}         {}    {}".format(slot, car.registration_no, car.color))
         return True
+
+    def slot_number_for_registration_number(self, reg_no):
+        slot_number = None
+        if reg_no in self.reg_no_slot_map:
+            slot_number = self.reg_no_slot_map[reg_no]
+            print(slot_number)
+            return slot_number
+        else:
+            print("Not found")
+            return slot_number
+
+    def registration_numbers_for_cars_with_colour(self, color):
+        return
+
+    def slot_numbers_for_cars_with_colour(self, color):
+        return

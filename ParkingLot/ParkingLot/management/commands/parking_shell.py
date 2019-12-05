@@ -31,20 +31,20 @@ class Command(BaseCommand):
         elif command == 'status':
             parking_lot.status()
 
-        # elif command == 'registration_numbers_for_cars_with_colour':
-        #     assert len(
-        #         command_with_params) == 2, "registration_numbers_for_cars_with_colour needs color as well"
-        #     parking_lot.registration_numbers_for_cars_with_colour(command_with_params[1])
-        #
-        # elif command == 'slot_numbers_for_cars_with_colour':
-        #     assert len(
-        #         command_with_params) == 2, "slot_numbers_for_cars_with_colour needs color as well"
-        #     parking_lot.slot_numbers_for_cars_with_colour(command_with_params[1])
-        #
-        # elif command == 'slot_number_for_registration_number':
-        #     assert len(
-        #         command_with_params) == 2, "slot_number_for_registration_number needs registration_number as well"
-        #     parking_lot.slot_number_for_registration_number(command_with_params[1])
+        elif command == 'registration_numbers_for_cars_with_colour':
+            assert len(
+                command_with_params) == 2, "registration_numbers_for_cars_with_colour needs color as well"
+            parking_lot.registration_numbers_for_cars_with_colour(command_with_params[1])
+
+        elif command == 'slot_numbers_for_cars_with_colour':
+            assert len(
+                command_with_params) == 2, "slot_numbers_for_cars_with_colour needs color as well"
+            parking_lot.slot_numbers_for_cars_with_colour(command_with_params[1])
+
+        elif command == 'slot_number_for_registration_number':
+            assert len(
+                command_with_params) == 2, "slot_number_for_registration_number needs registration_number as well"
+            parking_lot.slot_number_for_registration_number(command_with_params[1])
 
         elif command == 'exit':
             exit(0)
