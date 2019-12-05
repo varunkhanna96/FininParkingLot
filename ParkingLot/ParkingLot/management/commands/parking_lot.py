@@ -1,4 +1,4 @@
-from collections import OrderedDict
+from collections import OrderedDict, defaultdict
 
 
 class Car:
@@ -13,6 +13,7 @@ class ParkingArea:
         self.available_slots = list()
         self.slot_car_map = OrderedDict()
         self.reg_no_slot_map = dict()
+        self.color_reg_map = defaultdict(list)
 
     def create_slots(self, number_of_slots):
         self.total_slots = number_of_slots
@@ -26,6 +27,7 @@ class ParkingArea:
             slot = self.available_slots.pop()
             self.slot_car_map[slot] = car
             self.reg_no_slot_map[number] = slot
+            self.color_reg_map[color].append(number)
             print('Car parked on slot number {}'.format(slot))
             return slot
         else:
@@ -39,6 +41,7 @@ class ParkingArea:
         car = self.slot_car_map[slot]
         del self.slot_car_map[slot]
         del self.reg_no_slot_map[car.registration_no]
+        self.color_reg_map[car.color].remove(car.registration_no)
         print('Slot number {} is free'.format(slot))
         return True
 
@@ -59,7 +62,12 @@ class ParkingArea:
             return slot_number
 
     def registration_numbers_for_cars_with_colour(self, color):
-        return
+        reg_number = self.color_reg_map[color]
+        print(", ".join(reg_number))
+        return self.color_reg_map[color]
 
     def slot_numbers_for_cars_with_colour(self, color):
-        return
+        reg_numbers = self.color_reg_map[color]
+        slots = [self.reg_no_slot_map[reg_number] for reg_number in reg_numbers]
+        print(", ".join(map(str, slots)))
+        return slots
