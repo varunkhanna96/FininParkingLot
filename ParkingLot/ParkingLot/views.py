@@ -84,11 +84,9 @@ class SlotNumberForCarsWithColor(APIView):
     def get(self, request, *args, **kwargs):
         slot_no = ParkingDetails.objects.filter(car_color__iexact=kwargs['color']).\
             values_list('slot_no', flat=True)
-        if slot_no:
-            slot_no = ','.join(slot_no)
-        else:
+        if not slot_no:
             slot_no = 'Not Found'
-        return Response({'registration_number': slot_no}, status=200)
+        return Response({'slot_numbers': slot_no}, status=200)
 
 
 class SlotNumberForRegistrationNumber(APIView):
@@ -96,8 +94,6 @@ class SlotNumberForRegistrationNumber(APIView):
     def get(self, request, *args, **kwargs):
         slot_no = ParkingDetails.objects.filter(car_registration_number__iexact=kwargs['reg_no']).\
             values_list('slot_no', flat=True)
-        if slot_no:
-            slot_no = ','.join(slot_no)
-        else:
+        if not slot_no:
             slot_no = 'Not Found'
-        return Response({'registration_number': slot_no}, status=200)
+        return Response({'slot_numbers': slot_no}, status=200)
