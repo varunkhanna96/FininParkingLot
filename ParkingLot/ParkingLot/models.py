@@ -16,8 +16,11 @@ class ParkingLotSlots(BaseModel):
     id = models.AutoField(primary_key=True)
     status = models.CharField(default=ParkingConst.FREE.value, max_length=10)
 
+    class Meta:
+        ordering = ['id']
+
 
 class ParkingDetails(BaseModel):
-    slot_no = models.ForeignKey('ParkingLotSlots', on_delete=models.CASCADE)
+    slot_no = models.OneToOneField('ParkingLotSlots', on_delete=models.CASCADE)
     car_registration_number = models.CharField(max_length=40, blank=True, null=True, unique=True)
     car_color = models.CharField(max_length=20, blank=True, null=True)
